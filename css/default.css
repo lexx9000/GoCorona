@@ -1,0 +1,12 @@
+/* Чтобы прибить footer к низу сайта */
+.wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Чтобы main раширялся и прижал футер к низу */
+.main {
+  flex: 1 1 auto;
+}

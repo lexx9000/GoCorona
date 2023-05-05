@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/* Очистим все отступы и границы */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* Изменяем подсчет ширины блока */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Убираем линии обводки у некоторых браузеров */
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+/* Делаем блочными теги */
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+/* Уравниваем поведение шрифтов и элементов для разных браузеров */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Просим теги форм наследовать семейсво шрифта  */
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+/* убрать крест для удаления текста в инпуте для IE  */
+input::-ms-clear {
+  display: none;
+  background-color: transparent;
+}
+
+/* при наведении на кнопку курсор превращается в руку  */
+button {
+  cursor: pointer;
+}
+
+/* убрать отступы и пробелы в копке для браузера FireFox  */
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+/* Убираем подчеркивание для ссылок и посещённых ссылок*/
+a,
+a:visited {
+  text-decoration: none;
+}
+
+/* Убираем подчеркивание для ссылок при наведении*/
+a:hover {
+  text-decoration: none;
+}
+
+/* Убираем маркирование списка*/
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Обнулим все стили для заголовков */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}

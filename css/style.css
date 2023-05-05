@@ -1,0 +1,879 @@
+/* Установить шрифт, размер, цвет */
+body {
+  font-family: Rubik;
+  font-size: 12px;
+  color: #616161;
+}
+
+/* Установить размер контейнера */
+[class*="__container"] {
+  max-width: 1087px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ШАПКА */
+/* Позиционирование (выбрать абсолютное или фиксированное) */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.header__container {
+  display: flex;
+  /* установить высоту */
+  min-height: 114px;
+  align-items: center;
+}
+
+.header__logo {
+  position: relative;
+  z-index: 5;
+}
+
+.header__menu {
+  flex: 1 1 auto;
+}
+
+.menu {
+  display: flex;
+  /* элементы меню прижаты вправо */
+  justify-content: flex-end;
+}
+
+.menu__list {
+  display: flex;
+}
+
+.menu__item {
+  /* отступ у элементов меню */
+  margin-right: 40px;
+}
+
+.menu__link {
+  /* Стили текста меню */
+  font-family: Raleway;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.14em;
+  color: #000;
+}
+
+.menu__link:hover {
+  text-decoration: underline;
+}
+
+/* стили самого правого блока  */
+.header__user-nav {
+  position: relative;
+  z-index: 5;
+  /* Указать размер */
+  flex: 0 0 252px;
+  display: flex;
+  /* Выравнивание */
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* КНОПКА */
+.btn {
+  display: inline-flex;
+  font-family: Raleway;
+  font-weight: 800;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.14em;
+  color: #fcfdfe;
+  text-transform: uppercase;
+  border-radius: 5px;
+  background: #ec5863;
+  padding: 14px 30px;
+  transition: background-color 0.3s ease 0s;
+}
+.btn:hover {
+  background: #f0747d;
+}
+
+.btn_blue {
+  background: #4285f4;
+}
+
+.btn_blue:hover {
+  background: #78aafc;
+}
+
+/* Скрываем бургер меню изначально */
+.icon-menu {
+  display: none;
+}
+
+/* АДАПТИВ */
+
+/* PC */
+@media (max-width: 1087px) {
+  [class*="__container"] {
+    max-width: 970px;
+  }
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+  [class*="__container"] {
+    max-width: 750px;
+  }
+  .header__container {
+    min-height: 80px;
+  }
+
+  .header__user-nav {
+    flex: 0 0 170px;
+  }
+
+  .menu__item {
+    margin-right: 30px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+  [class*="__container"] {
+    max-width: none;
+  }
+
+  /* Стилизация бургер-меню */
+  .icon-menu {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 5;
+    padding: 10px;
+    background-color: transparent;
+    margin-left: 20px;
+  }
+
+  /* рисуем полоски */
+  .icon-menu span,
+  .icon-menu::before,
+  .icon-menu::after {
+    content: "";
+    transition: all 0.3s ease 0s;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: rgb(0, 0, 0);
+  }
+
+  .icon-menu::before {
+    top: 0;
+  }
+
+  .icon-menu::after {
+    bottom: 0;
+  }
+
+  /* превращаем в крестик */
+  .icon-menu span {
+    top: 50%;
+    transform: scale(1) translate(0px, -50%);
+  }
+
+  .icon-menu.active span {
+    width: 0;
+  }
+
+  .icon-menu.active::before {
+    top: 50%;
+    transform: rotate(-45deg) translate(0px, -50%);
+  }
+  .icon-menu.active::after {
+    bottom: 50%;
+    transform: rotate(45deg) translate(0px, 50%);
+  }
+
+  /* Стилизация появляющегося меню на мобильных */
+  .menu__body {
+    position: fixed;
+    top: 0;
+    /* Установить 0 при редактировании, установить -100%, когда сбудет сделано */
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* первый padding - отступ от верха страницы. Должен быть больше хедера на 20px */
+    padding: 100px 30px 30px 30px;
+    /* будет показываться слева */
+    transition: left 0.3s ease 0s;
+    /* чтобы проскролить длинное меню */
+    overflow: auto;
+  }
+
+  /* ссылки вртикально, по центру */
+  .menu__list {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* отступы вниз списка мению */
+  .menu__item:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  /* цвет ссылок и их размер */
+  .menu__link {
+    color: #000000;
+    font-size: 20px;
+  }
+
+  .menu__body.active {
+    left: 0;
+  }
+
+  /* прокладка чтобы меню заезжало за header при скроле */
+  .menu__body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* высота прокладки должна быть равна высоте хедера */
+    height: 80px;
+    width: 100%;
+    background-color: #fff;
+  }
+}
+
+/* MINI-MOBILE */
+@media (max-width: 479.98px) {
+  /* скрытие надписи на логотипе */
+  .header__logo {
+    flex: 0 0 40px;
+    overflow: hidden;
+  }
+  .header__logo img {
+    max-width: none;
+  }
+}
+
+/* ================================================ */
+/* OFFER-BLOCK */
+
+.offer-block {
+}
+.offer-block__title {
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 126%;
+  color: #000000;
+}
+.offer-block__title:not(:last-child) {
+  margin: 0px 0px 12px 0px;
+}
+
+.offer-block__title span {
+  color: #ec5863;
+}
+
+.offer-block__title_blue span {
+  color: #4285f4;
+}
+.offer-block__text:not(:last-child) {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 138.5%;
+  letter-spacing: 0.08em;
+  color: #616161;
+  margin: 0px 0px 24px 0px;
+}
+
+.offer-block__text {
+  /* ограничение для блока */
+  max-width: 410px;
+}
+.offer-block__button {
+}
+/* АДАПТИВ */
+
+/* PC */
+@media (max-width: 1087px) {
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+}
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+  .offer-block__title {
+    font-size: 34px;
+  }
+}
+
+/* MINI-MOBILE */
+@media (max-width: 479.98px) {
+}
+
+/* ================================================ */
+/* HERO */
+
+.hero {
+  background: #fafbfd;
+
+  position: relative;
+}
+.hero__container {
+  padding: 150px 15px 50px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* для декора */
+  position: relative;
+}
+
+/* красный декор */
+.hero__container:before {
+  content: "";
+  position: absolute;
+  /* чтобы растягивался на всю ширину */
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  /* ширина на которую должен вылезать */
+  right: 267px;
+  transform: translate(100%, 0px);
+  background: #ec5863;
+  border-radius: 30px 0px 0px 30px;
+}
+
+.hero__content {
+  flex: 0 1 47%;
+  /* отступ безопасности */
+  padding: 0px 20px;
+}
+.hero__offer-block {
+}
+
+.hero__image {
+  flex: 0 1 53%;
+}
+
+.hero__image img {
+  position: relative;
+  z-index: 15;
+}
+
+.hero__video {
+  padding: 60px 0px 0px 20px;
+  flex: 1 1 100%;
+}
+.video-hero {
+  display: inline-flex;
+  align-items: center;
+}
+.video-hero__icon {
+  flex: 0 0 44px;
+}
+.video-hero__body {
+  padding: 0px 0px 0px 12px;
+}
+.video-hero__title {
+  font-size: 13px;
+  line-height: 126%;
+  letter-spacing: 0.08em;
+  color: #b0b0b0;
+  margin: 0px 0px 5px 0px;
+}
+.video-hero__title:not(:last-child) {
+  margin: 0px 0px 5px 0px;
+}
+
+.video-hero__text {
+  font-size: 9px;
+  line-height: 126%;
+  letter-spacing: 0.165em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+/* АДАПТИВ */
+
+/* PC */
+@media (max-width: 1087px) {
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+  .hero__container:before {
+    right: 185px;
+    border-radius: 20px 0px 0px 20px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+  .hero__container:before {
+    display: none;
+  }
+  .offer-block__text {
+    /* ограничение для блока */
+    max-width: none;
+  }
+  .hero__content {
+    flex: 1 1 auto;
+    padding: 0;
+  }
+  .hero__container {
+    padding: 100px 15px 30px 15px;
+  }
+  .hero__image {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 30px 0px;
+  }
+  .hero__video {
+    padding: 0px;
+  }
+}
+
+/* MINI-MOBILE */
+@media (max-width: 479.98px) {
+}
+
+/* ===================================== */
+/* STAY SAFE */
+
+.stay-safe {
+}
+.stay-safe__container {
+  display: flex;
+  align-items: center;
+  padding: 79px 0px;
+}
+
+.stay-safe__img {
+  flex: 0 1 50%;
+}
+.stay-safe__img-wrapper {
+  position: relative;
+  width: 338px;
+  height: 542px;
+  margin-left: 47px;
+  padding: 55px 0px 0px 72px;
+}
+
+.stay-safe__img-block {
+  display: inline-block;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  position: relative;
+}
+
+.stay-safe__img-block img {
+  position: relative;
+  z-index: 2;
+}
+
+.stay-safe__img-block::after {
+  content: "";
+  position: absolute;
+  width: 206px;
+  height: 27px;
+  left: 12px;
+  bottom: -12px;
+  background: rgba(240, 240, 240, 0.49);
+  border-radius: 16px;
+}
+
+.stay-safe__img-decor {
+  position: absolute;
+  background-color: #ec5863;
+  border-radius: 30px;
+  width: 77px;
+  height: 77px;
+}
+.stay-safe__img-decor1 {
+  width: 147px;
+  height: 147px;
+  top: 0;
+  left: 0;
+}
+.stay-safe__img-decor2 {
+  right: 0;
+  bottom: 107px;
+}
+.stay-safe__img-decor3 {
+  left: 32px;
+  bottom: 0px;
+}
+
+.stay-safe__content {
+  flex: 0 1 50%;
+}
+.stay-safe__offer-block {
+}
+
+/* АДАПТИВ */
+
+/* PC */
+@media (max-width: 1087px) {
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+  .stay-safe__img-wrapper {
+    margin-left: 0px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+  .stay-safe__container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 50px 0px;
+  }
+
+  .stay-safe__content {
+    margin-bottom: 30px;
+    padding: 0px 15px;
+  }
+
+  .stay-safe__img-wrapper {
+    width: 290px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* MINI-MOBILE */
+@media (max-width: 479.98px) {
+}
+
+/* ===================================================================== */
+/* EXPERTS */
+.experts {
+  background: #fafbfd;
+  padding: 103px 0px 116px 0px;
+}
+.experts__container {
+}
+.experts__statistics {
+}
+.statistics-experts {
+  max-width: 655px;
+  margin: 0 auto;
+  position: relative;
+}
+.statistics-experts__list {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  box-shadow: 0px 2px 24px rgba(88, 126, 236, 0.15);
+  border-radius: 16px;
+  padding: 25px 80px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 80px;
+}
+.statistics-experts__item {
+  flex: 0 1 25%;
+  text-align: center;
+}
+
+.statistics-experts__item:last-child {
+  flex: 0 1 50%;
+}
+.statistics-experts__value {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
+  color: #ec5863;
+  margin-bottom: 5px;
+}
+.statistics-experts__text {
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: 0.37em;
+  text-transform: uppercase;
+  color: #000000;
+}
+.statistics-experts__decor {
+  position: absolute;
+  background: #ec5863;
+  border-radius: 30px;
+}
+.statistics-experts__decor1 {
+  width: 65px;
+  height: 65px;
+  transform: rotate(-30deg);
+  bottom: -31px;
+  left: -31px;
+  border-radius: 16px;
+}
+.statistics-experts__decor2 {
+  width: 97px;
+  height: 97px;
+  transform: rotate(30deg);
+  right: 50%;
+  top: -40px;
+}
+.statistics-experts__decor3 {
+  width: 128px;
+  height: 128px;
+  transform: rotate(-30deg);
+  right: -55px;
+  top: 0px;
+}
+
+.experts__body {
+  display: flex;
+}
+
+.experts__content {
+  flex: 1 1 50%;
+  padding-left: 40px;
+  align-items: center;
+  display: flex;
+  padding: 0px 20px 0px 0px;
+}
+.experts__offer-block .offer-block__text {
+  max-width: 400px;
+}
+
+.experts__video {
+  flex: 1 1 50%;
+  padding: 0px 0px 30% 0px;
+  position: relative;
+  box-shadow: 0px 4px 18px rgba(88, 126, 236, 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.experts__video iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+/* АДАПТИВ */
+
+/* PC */
+@media (max-width: 1087px) {
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+  .statistics-experts {
+    max-width: 590px;
+  }
+  .statistics-experts__list {
+    padding: 25px 30px;
+  }
+}
+/* MOBILE */
+@media (max-width: 767.98px) {
+  .experts__body {
+    flex-direction: column;
+  }
+  .statistics-experts__list {
+    flex-direction: column;
+  }
+  .experts {
+    padding-bottom: 50px;
+  }
+  .statistics-experts__item {
+    margin: 0px 0px 15px 0px;
+  }
+  .statistics-experts {
+    max-width: 250px;
+  }
+  .experts__content {
+    margin: 0px 0px 50px 0px;
+  }
+  .experts__video {
+    padding: 0px 0px 70% 0px;
+  }
+}
+
+/* MINI-MOBILE */
+@media (max-width: 479.98px) {
+}
+
+/* =========================================== */
+
+/* HEALTH CARE */
+
+.healthcare {
+  padding: 80px 0px 70px 0px;
+}
+.healthcare-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.healthcare__title {
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 126%;
+  text-align: center;
+  color: #000;
+  margin-bottom: 14px;
+  max-width: 770px;
+}
+.healthcare__title span {
+  color: #ec5863;
+}
+
+.healthcare__desc {
+  font-size: 12px;
+  line-height: 138.5%;
+  text-align: center;
+  letter-spacing: 0.08em;
+  color: #616161;
+  margin-bottom: 60px;
+  max-width: 600px;
+}
+.healthcare__wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.item-healthcare {
+  box-shadow: 0px 4px 18px rgba(88, 126, 236, 0.18);
+  border-radius: 8px;
+  padding: 36px 20px;
+}
+.item-healthcare__img {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 58px;
+}
+.item-healthcare__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 138.5%;
+  text-align: center;
+  letter-spacing: 0.08em;
+  color: #000000;
+  margin-bottom: 4px;
+}
+.item-healthcare__desc {
+  font-size: 12px;
+  line-height: 138.5%;
+  text-align: center;
+  letter-spacing: 0.08em;
+  color: #616161;
+}
+
+.healthcare__list {
+  display: flex;
+  justify-content: space-between;
+  gap: 72px;
+}
+.healthcare__column {
+  position: relative;
+  flex: 0 1 33.333%;
+}
+
+.healthcare__item {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  height: 100%;
+}
+
+.item-healthcare-1 {
+  position: absolute;
+  width: 65.75px;
+  height: 65.75px;
+  left: -19px;
+  bottom: -31px;
+  background: #ec5863;
+  border-radius: 16px;
+  transform: rotate(-30deg);
+}
+
+.item-healthcare-2 {
+  position: absolute;
+  width: 96.96px;
+  height: 96.96px;
+  right: -42px;
+  top: 41px;
+  background: #ec5863;
+  border-radius: 30px;
+  transform: rotate(105deg);
+}
+
+.item-healthcare-3 {
+  position: absolute;
+  width: 127.47px;
+  height: 127.47px;
+  right: -87px;
+  bottom: -22px;
+  background: #ec5863;
+  border-radius: 30px;
+  transform: rotate(-30deg);
+}
+
+.item-healthcare-4 {
+  position: absolute;
+  width: 65.75px;
+  height: 65.75px;
+  right: -19px;
+  top: -31px;
+
+  background: #ec5863;
+  border-radius: 16px;
+  transform: rotate(-30deg);
+}
+
+/* АДАПТИВ */
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+  .healthcare {
+    padding: 30px 0px 20px 0px;
+  }
+
+  .healthcare__list {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    gap: 72px;
+  }
+}
+
+/* ============================== */
+/* FOOTER */
+
+.footer {
+}
+.footer__container {
+  padding: 38px 0px 46px 0px;
+}
+.apps__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MOBILE */
+@media (max-width: 767.98px) {
+  .apps__list {
+    padding: 0px 10px;
+  }
+}
