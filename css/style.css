@@ -265,8 +265,6 @@ body {
 /* ================================================ */
 /* OFFER-BLOCK */
 
-.offer-block {
-}
 .offer-block__title {
   font-weight: 700;
   font-size: 44px;
@@ -297,8 +295,7 @@ body {
   /* ограничение для блока */
   max-width: 410px;
 }
-.offer-block__button {
-}
+
 /* АДАПТИВ */
 
 /* PC */
@@ -356,8 +353,6 @@ body {
   flex: 0 1 47%;
   /* отступ безопасности */
   padding: 0px 20px;
-}
-.hero__offer-block {
 }
 
 .hero__image {
@@ -449,8 +444,6 @@ body {
 /* ===================================== */
 /* STAY SAFE */
 
-.stay-safe {
-}
 .stay-safe__container {
   display: flex;
   align-items: center;
@@ -515,8 +508,6 @@ body {
 .stay-safe__content {
   flex: 0 1 50%;
 }
-.stay-safe__offer-block {
-}
 
 /* АДАПТИВ */
 
@@ -564,10 +555,7 @@ body {
   background: #fafbfd;
   padding: 103px 0px 116px 0px;
 }
-.experts__container {
-}
-.experts__statistics {
-}
+
 .statistics-experts {
   max-width: 655px;
   margin: 0 auto;
@@ -860,8 +848,6 @@ body {
 /* ============================== */
 /* FOOTER */
 
-.footer {
-}
 .footer__container {
   padding: 38px 0px 46px 0px;
 }
